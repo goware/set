@@ -1,6 +1,7 @@
 package set_test
 
 import (
+	"reflect"
 	"testing"
 
 	"github.com/goware/set"
@@ -13,6 +14,10 @@ func TestInt64Set(t *testing.T) {
 	if len(s) != 5 {
 		t.Error("expecting 5 values in the set")
 	}
+
+	if !reflect.DeepEqual([]int64(s), []int64{1, 2, 3, 4, 5}) {
+		t.Error("invalid set")
+	}
 }
 
 func TestStringSet(t *testing.T) {
@@ -21,5 +26,9 @@ func TestStringSet(t *testing.T) {
 
 	if len(s) != 5 {
 		t.Error("expecting 5 values in the set")
+	}
+
+	if !reflect.DeepEqual([]string(s), []string{"a", "b", "c", "d", "e"}) {
+		t.Error("invalid set")
 	}
 }
