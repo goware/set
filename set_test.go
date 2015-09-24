@@ -42,6 +42,23 @@ func TestInt64Set(t *testing.T) {
 	}
 }
 
+func TestExistsInDescendingInt64Set(t *testing.T) {
+	s := set.Int64Set{}
+	s = s.Add(100)
+	s = s.Add(10)
+	s = s.Add(1)
+
+	if !s.Exists(100) {
+		t.Error("expecting value to exist in the set")
+	}
+	if !s.Exists(10) {
+		t.Error("expecting value to exist in the set")
+	}
+	if !s.Exists(1) {
+		t.Error("expecting value to exist in the set")
+	}
+}
+
 func TestStringSet(t *testing.T) {
 	s := set.NewStringSet("a", "b", "a", "c")
 
