@@ -48,14 +48,33 @@ func TestExistsInDescendingInt64Set(t *testing.T) {
 	s = s.Add(10)
 	s = s.Add(1)
 
-	if !s.Exists(100) {
-		t.Error("expecting value to exist in the set")
+	for _, v := range []int64{100, 10, 1} {
+		if !s.Exists(v) {
+			t.Errorf("expecting value %v to exist in the set", v)
+		}
 	}
-	if !s.Exists(10) {
-		t.Error("expecting value to exist in the set")
+}
+
+func TestExistsInStringSet(t *testing.T) {
+	words := []string{
+		"www", "wwww", "mail", "api", "status", "cache", "cdn", "direct",
+		"blog", "wiki", "faq", "help", "support", "knowledgebase", "mobile",
+		"demo", "beta", "test", "testing", "prod", "production", "stg", "staging", "dev", "devel", "development",
+		"root", "admin", "administrator", "superadmin", "sysadmin", "webmaster",
+		"user", "account", "bot", "anonymous", "guest", "member", "collaborator", "moderator", "owner",
+		"news", "job", "jobs", "career", "pricing", "about", "contact", "terms", "privacy", "tour",
+		"search", "discover", "popular", "trending", "enterprise",
+		"join", "invite", "register", "follow", "login", "logout", "auth", "oauth", "ping",
+		"download", "upload", "app", "apps", "marketplace", "addons",
+		"mention", "mentions", "tag", "tags", "email", "example", "old", "new",
 	}
-	if !s.Exists(1) {
-		t.Error("expecting value to exist in the set")
+
+	s := set.NewStringSet(words...)
+
+	for _, v := range words {
+		if !s.Exists(v) {
+			t.Errorf("expecting value %v to exist in the set", v)
+		}
 	}
 }
 
