@@ -79,6 +79,20 @@ func TestSubtractionInt64Set(t *testing.T) {
 	}
 }
 
+func TestSubtractionInt64SetWithoutAdds(t *testing.T) {
+	first := set.Int64Set{1, 2, 7, 9, 52, 53, 55, 63, 180, 212, 291, 307, 329, 365, 394, 395, 421, 448, 457, 484, 523, 533, 554, 561, 706, 896, 901, 906, 931, 959, 1081, 1086, 1088, 1090}
+
+	second := set.Int64Set{1, 2, 7, 52, 55, 63, 180, 212, 291, 394, 395, 421, 448, 457, 533, 554, 561, 706, 901, 906, 1081, 1086, 1088, 1090}
+
+	firstMinusSecond := first.Remove(second...)
+
+	for _, i := range second {
+		if firstMinusSecond.Exists(i) {
+			t.Errorf("Error! %v shouldn't be in firstMinusSecond", i)
+		}
+	}
+}
+
 func TestStringSet(t *testing.T) {
 	s := set.NewStringSet("a", "b", "a", "c")
 
