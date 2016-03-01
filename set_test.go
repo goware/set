@@ -40,6 +40,9 @@ func TestInt64Set(t *testing.T) {
 	if s.Exists(100) {
 		t.Error("expecting value to not exist in the set")
 	}
+	if !reflect.DeepEqual([]int64(s), []int64{1, 2, 3, 6, 8, 9, 13}) {
+		t.Error("invalid set")
+	}
 }
 
 func TestExistsInDescendingInt64Set(t *testing.T) {
@@ -53,6 +56,10 @@ func TestExistsInDescendingInt64Set(t *testing.T) {
 			t.Errorf("expecting value %v to exist in the set", v)
 		}
 	}
+	if !reflect.DeepEqual([]int64(s), []int64{1, 10, 100}) {
+		t.Error("invalid set")
+	}
+
 }
 
 func TestExistsInStringSet(t *testing.T) {
@@ -145,4 +152,9 @@ func TestStringSet(t *testing.T) {
 	if s.Exists("asdf") {
 		t.Error("expecting value to not exist in the set")
 	}
+
+	if !reflect.DeepEqual([]string(s), []string{"b", "c", "e", "f", "z"}) {
+		t.Error("invalid set")
+	}
+
 }
